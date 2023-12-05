@@ -1,0 +1,6 @@
+zigbeeManufacturer:
+  - id: "Third Reality/3RTHS24BZ"
+    deviceLabel: ThirdReality Temperature and Humidity Sensor
+    manufacturer: Third Reality, Inc
+    model: 3RTHS24BZ
+    deviceProfileName: humidity-temp-battery

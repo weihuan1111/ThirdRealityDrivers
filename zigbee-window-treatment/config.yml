@@ -1,0 +1,6 @@
+name: 'Zigbee Window Treatment'
+packageKey: 'zigbee-window-treatment'
+permissions:
+  zigbee: {}
+description: "ThirdReality window treatment devices drivers"
+vendorSupportInformation: "https://www.3reality.com/"

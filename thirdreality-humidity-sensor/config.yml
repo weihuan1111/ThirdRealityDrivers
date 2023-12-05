@@ -1,0 +1,6 @@
+name: 'ThirdReality Humidity Sensor'
+packageKey: 'thirdreality-humidity-sensor'
+permissions:
+  zigbee: {}
+description: "ThirdReality Temperature and Humidity sensor drivers"
+vendorSupportInformation: "https://www.3reality.com/"

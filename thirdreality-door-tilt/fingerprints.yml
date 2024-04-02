@@ -1,0 +1,6 @@
+zigbeeManufacturer:
+  - id: "Third Reality/3RDTS01056Z"
+    deviceLabel: ThirdReality Garage Door Tilt Sensor
+    manufacturer: Third Reality, Inc
+    model: 3RDTS01056Z
+    deviceProfileName: thirdreality-door-tilt

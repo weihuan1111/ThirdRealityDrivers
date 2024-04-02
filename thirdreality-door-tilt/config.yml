@@ -1,0 +1,6 @@
+name: 'ThirdReality Door Tilt'
+packageKey: 'thirdreality-door-tilt'
+permissions:
+  zigbee: {}
+description: "ThirdReality Garage Door Tilt Sensor driver"
+vendorSupportInformation: "https://www.3reality.com/"

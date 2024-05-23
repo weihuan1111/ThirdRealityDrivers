@@ -81,7 +81,8 @@ local zigbee_switch_driver_template = {
     capabilities.powerMeter,
     capabilities.energyMeter,
     capabilities.motionSensor,
-    capabilities.illuminanceMeasurement
+    capabilities.illuminanceMeasurement,
+    capabilities.battery
   },
   sub_drivers = {
     require("hanssem"),

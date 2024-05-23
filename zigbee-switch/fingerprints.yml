@@ -913,7 +913,7 @@ zigbeeManufacturer:
     deviceLabel: ThirdReality Switch
     manufacturer: Third Reality, Inc
     model: 3RSS009Z
-    deviceProfileName: basic-switch
+    deviceProfileName: thirdreality-smart-switch
   - id: Third Reality/3RSS008Z
     deviceLabel: ThirdReality Switch
     manufacturer: Third Reality, Inc

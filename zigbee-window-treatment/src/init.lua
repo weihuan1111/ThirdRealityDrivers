@@ -15,9 +15,54 @@
 local capabilities = require "st.capabilities"
 local ZigbeeDriver = require "st.zigbee"
 local defaults = require "st.zigbee.defaults"
+local zcl_clusters = require "st.zigbee.zcl.clusters"
+local WindowCovering = zcl_clusters.WindowCovering
+local SHADE_SET_STATUS = "shade_set_status"
 
 local function added_handler(self, device)
   device:emit_event(capabilities.windowShade.supportedWindowShadeCommands({"open", "close", "pause"}, { visibility = { displayed = false }}))
+end
+
+local function current_position_attr_handler(driver, device, value, zb_rx)
+  local level = value.value
+  local current_level = device:get_latest_state("main", capabilities.windowShadeLevel.ID, capabilities.windowShadeLevel.shadeLevel.NAME)
+  local windowShade = capabilities.windowShade.windowShade
+  if level == 0 then
+    device:emit_event(windowShade.open())
+    device:emit_event(capabilities.windowShadeLevel.shadeLevel(0))
+  elseif level == 100 then
+    device:emit_event(windowShade.closed())
+    device:emit_event(capabilities.windowShadeLevel.shadeLevel(100))
+  else
+    if current_level ~= level or current_level == nil then
+      current_level = current_level or 0
+      device:emit_event(capabilities.windowShadeLevel.shadeLevel(level))
+      local event = nil
+      if current_level ~= level then
+        event = current_level < level and windowShade.closing() or windowShade.opening()
+      end
+      if event ~= nil then
+        device:emit_event(event)
+      end
+    end
+    local set_status_timer = device:get_field(SHADE_SET_STATUS)
+    if set_status_timer then
+      device.thread:cancel_timer(set_status_timer)
+      device:set_field(SHADE_SET_STATUS, nil)
+    end
+    local set_window_shade_status = function()
+      local current_level = device:get_latest_state("main", capabilities.windowShadeLevel.ID, capabilities.windowShadeLevel.shadeLevel.NAME)
+      if current_level == 0 then
+        device:emit_event(windowShade.open())
+      elseif current_level == 100 then
+        device:emit_event(windowShade.closed())
+      else
+        device:emit_event(windowShade.partially_open())
+      end
+    end
+    set_status_timer = device.thread:call_with_delay(1, set_window_shade_status)
+    device:set_field(SHADE_SET_STATUS, set_status_timer)
+  end
 end
 
 local zigbee_window_treatment_driver_template = {
@@ -26,6 +71,13 @@ local zigbee_window_treatment_driver_template = {
     capabilities.windowShadePreset,
     capabilities.windowShadeLevel,
     capabilities.battery
+  },
+  zigbee_handlers = {
+    attr = {
+      [WindowCovering.ID] = {
+        [WindowCovering.attributes.CurrentPositionLiftPercentage.ID] = current_position_attr_handler
+      }
+    }
   },
   lifecycle_handlers = {
     added = added_handler

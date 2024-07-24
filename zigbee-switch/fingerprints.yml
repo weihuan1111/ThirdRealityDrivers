@@ -934,6 +934,11 @@ zigbeeManufacturer:
     manufacturer: Third Reality, Inc
     model: 3RSP02028BZ
     deviceProfileName: switch-power-energy
+  - id: Third Reality/3RSPE01044BZ
+    deviceLabel: ThirdReality Plug
+    manufacturer: Third Reality, Inc
+    model: 3RSPE01044BZ
+    deviceProfileName: switch-power-energy
   - id: "DAWON_DNS/PM-S140-ZB"
     deviceLabel: Dawon Switch
     manufacturer: DAWON_DNS
@@ -2151,55 +2156,4 @@ zigbeeManufacturer:
     manufacturer: WALL HERO
     model: ACL-401S8I
     deviceProfileName: basic-switch
-zigbeeGeneric:
-  - id: "genericSwitch"
-    deviceLabel: Zigbee Switch
-    clusters:
-      server:
-        - 0x0006 #OnOff
-    deviceProfileName: basic-switch
-  - id: "genericDimmer"
-    deviceLabel: Zigbee Dimmer
-    clusters:
-      server:
-        - 0x0006 #OnOff
-        - 0x0008 #Level
-    deviceProfileName: switch-level
-  - id: "genericColorBulb"
-    deviceLabel: Zigbee Light
-    clusters:
-      server:
-        - 0x0006 #OnOff
-        - 0x0008 #Level
-        - 0x0300 #Color Control
-    deviceProfileName: rgbw-bulb
-  - id: "genericMeteredSwitch"
-    deviceLabel: Zigbee Switch
-    clusters:
-      server:
-        - 0x0006 #OnOff
-        - 0x0702 #Simple Metering
-    deviceProfileName: switch-power-energy
-  - id: "genericMeteredDimmer"
-    deviceLabel: Zigbee Dimmer
-    clusters:
-      server:
-        - 0x0006 #OnOff
-        - 0x0008 #Level
-        - 0x0702 #Simple Metering
-    deviceProfileName: switch-dimmer-power-energy
-  - id: "genericMeteredSwitch/2"
-    deviceLabel: Zigbee Switch
-    clusters:
-      server:
-        - 0x0006 #OnOff
-        - 0x0B04 #Electrical Measurment
-    deviceProfileName: switch-power
-  - id: "genericMeteredDimmer/2"
-    deviceLabel: Zigbee Dimmer
-    clusters:
-      server:
-        - 0x0006 #OnOff
-        - 0x0008 #Level
-        - 0x0B04 #Electrical Measurment
-    deviceProfileName: switch-level-power
+

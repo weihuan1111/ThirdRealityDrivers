@@ -6,7 +6,7 @@ zigbeeManufacturer:
     deviceProfileName: humidity-temp-battery
   - id: "Third Reality/3RTHS0224Z"
     deviceLabel: ThirdReality Temperature and Humidity Sensor Lite
-    manufacturer: Third Reality, Inc
+    manufacturer: Third Reality
     model: 3RTHS0224Z
     deviceProfileName: humidity-temp-battery
   - id: "Third Reality/3RSM0147Z"

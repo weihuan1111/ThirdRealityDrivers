@@ -1,0 +1,6 @@
+name: 'ThirdReality Smart Watering Kit'
+packageKey: 'thirdreality-smart-watering-kit'
+permissions:
+  zigbee: {}
+description: "ThirdReality Smart Watering Kit driver"
+vendorSupportInformation: "https://www.3reality.com/"

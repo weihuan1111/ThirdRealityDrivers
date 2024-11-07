@@ -909,11 +909,6 @@ zigbeeManufacturer:
     manufacturer:
     model: TERNCY-LS01
     deviceProfileName: basic-switch
-  - id: Third Reality/3RWK0148Z
-    deviceLabel: ThirdReality Smart Watering Kit
-    manufacturer: Third Reality, Inc
-    model: 3RWK0148Z
-    deviceProfileName: thirdreality-smart-switch
   - id: Third Reality/3RSS009Z
     deviceLabel: ThirdReality Switch
     manufacturer: Third Reality, Inc

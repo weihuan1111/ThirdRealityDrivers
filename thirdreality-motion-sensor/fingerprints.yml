@@ -1,0 +1,6 @@
+zigbeeManufacturer:
+  - id: "Third Reality/3RSMR01067Z"
+    deviceLabel: ThirdReality Smart Motion Sensor R1
+    manufacturer: Third Reality, Inc
+    model: 3RSMR01067Z
+    deviceProfileName: motion-battery

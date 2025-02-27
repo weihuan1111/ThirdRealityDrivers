@@ -1,4 +1,4 @@
-local clusters = require "st.zigbee.zcl.clusters"
+local clusters = require "st.zigbee.zcl.clusters"CENTRALITE_MFG1407
 local capabilities = require "st.capabilities"
 local IASZone = clusters.IASZone
 local ZONE_STATUS_ATTR = IASZone.attributes.ZoneStatus
@@ -6,14 +6,13 @@ local ZONE_STATUS_ATTR = IASZone.attributes.ZoneStatus
 local cluster_base = require "st.zigbee.cluster_base"
 local data_types = require "st.zigbee.data_types"
 local FrameCtrl = require "st.zigbee.zcl.frame_ctrl"
+local device_management = require "st.zigbee.device_management"
 
 local THIRDREALITY_WATERING_CLUSTER = 0xFFF2
 local WATERING_TIME = 0x0000
 local WATERING_INTERVAL = 0x0001
 local W_TIME = "watering-time"
 local W_INTERVAL = "watering-interval"
-local CENTRALITE_MFG = 0x1407
-
 
 local function device_added(driver, device)
     device:emit_event(capabilities.hardwareFault.hardwareFault.clear())
@@ -53,16 +52,6 @@ local function custom_write_attribute(device, cluster, attribute, data_type, val
     return message
 end
 
-local function custom_read_attribute(device, attribute, mfg_code)
-    local message = cluster_base.read_attribute(device, data_types.ClusterId(THIRDREALITY_WATERING_CLUSTER), attribute)
-    if mfg_code ~= nil then
-      message.body.zcl_header.frame_ctrl:set_mfg_specific()
-      message.body.zcl_header.mfg_code = data_types.validate_or_build_type(mfg_code, data_types.Uint16, "mfg_code")
-    end
-    return message
-end
-
-
 local function set_watering_time(device, speed)
     local watering_time = speed
     device:send(custom_write_attribute(device, THIRDREALITY_WATERING_CLUSTER, WATERING_TIME,
@@ -82,22 +71,26 @@ local function fan_speed_handler(driver, device, command)
     end
 end
 
-local function watering_attribute_handler(driver, device, zb_rx)
-    local attr_record = zb_rx.body.zcl_body.attr_records[1]
-    local attr_id = attr_record.attr_id
-    local value
+local function watering_time_handler(driver, device, value, zb_rx)
+    local fan_speed_value = value.value
+    device:emit_component_event(device.profile.components[W_TIME], capabilities.fanSpeed.fanSpeed(fan_speed_value))
+end
 
-    if attr_record.data_type.value == data_types.Uint16.ID then
-        value = attr_record.data.value
-    elseif attr_record.data_type.value == data_types.Uint8.ID then
-        value = attr_record.data.value
-    end
+local function watering_interval_handler(driver, device, value, zb_rx)
+    local fan_speed_value = value.value
+    device:emit_component_event(device.profile.components[W_INTERVAL], capabilities.fanSpeed.fanSpeed(fan_speed_value))
+end
 
-    if attr_id == WATERING_TIME then
-        device:emit_component_event(device.profile.components[W_TIME], capabilities.fanSpeed.fanSpeed(value))
-    elseif attr_id == WATERING_INTERVAL then
-        device:emit_component_event(device.profile.components[W_INTERVAL], capabilities.fanSpeed.fanSpeed(value))
-    end
+local function do_refresh(driver, device)
+    device:refresh()
+    device:send(cluster_base.read_manufacturer_specific_attribute(device, THIRDREALITY_WATERING_CLUSTER, WATERING_TIME, 0x1407))
+    device:send(cluster_base.read_manufacturer_specific_attribute(device, THIRDREALITY_WATERING_CLUSTER, WATERING_INTERVAL, 0x1407))
+end
+
+local function do_configure(driver, device)
+    device:configure()
+    device:send(device_management.build_bind_request(device, THIRDREALITY_WATERING_CLUSTER, driver.environment_info.hub_zigbee_eui), 1)
+    do_refresh(driver, device)
 end
 
 local thirdreality_device_handler = {
@@ -108,8 +101,8 @@ local thirdreality_device_handler = {
                 [ZONE_STATUS_ATTR.ID] = ias_zone_status_attr_handler
             },
             [THIRDREALITY_WATERING_CLUSTER] = {
-                [WATERING_TIME] = watering_attribute_handler,
-                [WATERING_INTERVAL] = watering_attribute_handler
+                [WATERING_TIME] = watering_time_handler,
+                [WATERING_INTERVAL] = watering_interval_handler
             }
         },
         cluster = {
@@ -121,10 +114,14 @@ local thirdreality_device_handler = {
     capability_handlers = {
         [capabilities.fanSpeed.ID] = {
           [capabilities.fanSpeed.commands.setFanSpeed.NAME] = fan_speed_handler
+        },
+        [capabilities.refresh.ID] = {
+            [capabilities.refresh.commands.refresh.NAME] = do_refresh,
         }
     },
     lifecycle_handlers = {
-        added = device_added
+        added = device_added,
+        doConfigure = do_configure
     },
     can_handle = function(opts, driver, device, ...)
       return device:get_manufacturer() == "Third Reality, Inc" and device:get_model() == "3RWK0148Z"

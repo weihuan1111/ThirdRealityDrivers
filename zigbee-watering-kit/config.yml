@@ -1,6 +1,0 @@
-name: 'Zigbee Watering Kit'
-packageKey: 'zigbee-watering-kit'
-permissions:
-  zigbee: {}
-description: "SmartThings driver for Zigbee Watering Kit devices"
-vendorSupportInformation: "https://support.smartthings.com"

@@ -1,6 +1,0 @@
-zigbeeManufacturer:
-  - id: Third Reality/3RWK0148Z
-    deviceLabel: ThirdReality Smart Watering Kit
-    manufacturer: Third Reality, Inc
-    model: 3RWK0148Z
-    deviceProfileName: watering-kit-battery

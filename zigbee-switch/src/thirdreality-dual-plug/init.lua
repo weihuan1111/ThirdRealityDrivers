@@ -21,7 +21,8 @@ local utils = require "st.utils"
 local CHILD_ENDPOINT = 2
 
 local ZIGBEE_DUAL_METERING_SWITCH_FINGERPRINT = {
-  {mfr = "Third Reality, Inc", model = "3RDP01072Z"}
+  {mfr = "Third Reality, Inc", model = "3RDP01072Z"},
+  {mfr = "Third Reality, Inc", model = "3RWP01073Z"}
 }
 
 local function can_handle_zigbee_dual_metering_switch(opts, driver, device, ...)

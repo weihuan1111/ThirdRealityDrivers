@@ -1,0 +1,6 @@
+name: 'Thirdreality Water Leak Sensor'
+packageKey: 'thirdreality-water-leak-sensor'
+permissions:
+  zigbee: {}
+description: "SmartThings driver for Thirdreality water leak sensor devices"
+vendorSupportInformation: "https://www.3reality.com/"

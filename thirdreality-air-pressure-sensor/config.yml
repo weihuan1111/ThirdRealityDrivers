@@ -1,0 +1,6 @@
+name: 'ThirdReality Air Pressure Sensor'
+packageKey: 'thirdreality-air-pressure-sensor'
+permissions:
+  zigbee: {}
+description: "ThirdReality Air Pressure sensor drivers"
+vendorSupportInformation: "https://www.3reality.com/"

@@ -69,3 +69,8 @@ zigbeeManufacturer:
     manufacturer: Third Reality, Inc
     model: 3RSPE02065Z
     deviceProfileName: switch-power-energy
+  - id: Third Reality/3RPL01084Z
+    deviceLabel: ThirdReality Presence Color Night Light
+    manufacturer: Third Reality, Inc
+    model: 3RPL01084Z
+    deviceProfileName: thirdreality-presence-color-night-light

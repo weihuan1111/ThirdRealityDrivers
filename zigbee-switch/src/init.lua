@@ -108,7 +108,8 @@ local zigbee_switch_driver_template = {
     require("robb"),
     require("wallhero"),
     require("thirdreality"),
-    require("thirdreality-dual-plug")
+    require("thirdreality-dual-plug"),
+    require("radar")
   },
   lifecycle_handlers = {
     init = device_init,

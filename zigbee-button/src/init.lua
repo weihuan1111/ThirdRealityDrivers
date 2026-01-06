@@ -97,7 +97,8 @@ local zigbee_button_driver_template = {
     require("iris"),
     require("samjin"),
     require("ewelink"),
-    require("thirdreality")
+    require("thirdreality"),
+    require("3R")
   },
   lifecycle_handlers = {
     added = added_handler,

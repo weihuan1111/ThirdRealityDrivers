@@ -1,6 +1,6 @@
 zigbeeManufacturer:
   - id: "Third Reality/3RWS0218Z"
-    deviceLabel: Thirdreality Smart WaterLeak Sensor Gen2
+    deviceLabel: ThirdReality Smart WaterLeak Sensor WL2
     manufacturer: Third Reality, Inc
     model: 3RWS0218Z
     deviceProfileName: water-battery

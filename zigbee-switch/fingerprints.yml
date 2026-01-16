@@ -1,6 +1,6 @@
 zigbeeManufacturer:
   - id: "Third Reality/3RDP01072Z"
-    deviceLabel: ThirdReality Plug
+    deviceLabel: ThirdReality Smart Dual Plug ZP1
     manufacturer: Third Reality, Inc
     model: 3RDP01072Z
     deviceProfileName: switch-power-energy
@@ -50,22 +50,22 @@ zigbeeManufacturer:
     model: 3RSPE01044BZ
     deviceProfileName: switch-power-energy
   - id: "Third Reality/3RWP01073Z"
-    deviceLabel: ThirdReality Plug
+    deviceLabel: ThirdReality Smart Wall Outlet ZW1
     manufacturer: Third Reality, Inc
     model: 3RWP01073Z
     deviceProfileName: switch-power-energy
   - id: Third Reality/3RSPU01080Z
-    deviceLabel: ThirdReality Plug
+    deviceLabel: ThirdReality Smart Plug UZ1
     manufacturer: Third Reality, Inc
     model: 3RSPU01080Z
     deviceProfileName: switch-power-energy
   - id: Third Reality/3RSP02064Z
-    deviceLabel: ThirdReality Plug
+    deviceLabel: ThirdReality Smart Plug Gen3
     manufacturer: Third Reality, Inc
     model: 3RSP02064Z
     deviceProfileName: switch-power-energy
   - id: Third Reality/3RSPE02065Z
-    deviceLabel: ThirdReality Plug
+    deviceLabel: ThirdReality Smart Plug E3
     manufacturer: Third Reality, Inc
     model: 3RSPE02065Z
     deviceProfileName: switch-power-energy
@@ -74,3 +74,13 @@ zigbeeManufacturer:
     manufacturer: Third Reality, Inc
     model: 3RPL01084Z
     deviceProfileName: thirdreality-presence-color-night-light
+  - id: Third Reality/3RSP0186Z
+    deviceLabel: ThirdReality Smart Plug C1
+    manufacturer: Third Reality, Inc
+    model: 3RSP0186Z
+    deviceProfileName: switch-power-energy
+  - id: Third Reality/3RSPJ0187Z
+    deviceLabel: ThirdReality Smart Plug J1
+    manufacturer: Third Reality, Inc
+    model: 3RSPJ0187Z
+    deviceProfileName: switch-power-energy

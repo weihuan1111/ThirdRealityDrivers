@@ -2,5 +2,5 @@ name: 'ThirdReality Motion Sensor'
 packageKey: 'thirdreality-motion-sensor'
 permissions:
   zigbee: {}
-description: "ThirdReality Smart Motion Sensor R1 drivers"
+description: "Drivers for ThirdReality Smart Motion Sensor R1 and Smart Presence Sensor R2"
 vendorSupportInformation: "https://www.3reality.com/"

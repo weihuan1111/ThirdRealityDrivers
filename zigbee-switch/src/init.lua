@@ -82,6 +82,7 @@ local zigbee_switch_driver_template = {
     capabilities.energyMeter,
     capabilities.motionSensor,
     capabilities.illuminanceMeasurement,
+    capabilities.tvocMeasurement,
     capabilities.battery
   },
   sub_drivers = {

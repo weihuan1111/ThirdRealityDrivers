@@ -3,4 +3,4 @@ zigbeeManufacturer:
     deviceLabel: ThirdReality Smart Air Pressure Sensor
     manufacturer: Third Reality, Inc
     model: 3RAP0149BZ
-    deviceProfileName: pressure-battery
+    deviceProfileName: pressure-battery-level

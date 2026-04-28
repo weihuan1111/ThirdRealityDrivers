@@ -1,0 +1,6 @@
+name: 'ThirdReality Smart Filter Sensor'
+packageKey: 'thirdreality-smart-filter-sensor'
+permissions:
+  zigbee: {}
+description: "ThirdReality Smart Filter Sensor drivers"
+vendorSupportInformation: "https://www.3reality.com/"

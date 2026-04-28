@@ -17,7 +17,8 @@ local ZigbeeDriver = require "st.zigbee"
 local defaults = require "st.zigbee.defaults"
 local clusters = require "st.zigbee.zcl.clusters"
 
-KEEN_PRESSURE_ATTRIBUTE = 0x0000
+local KEEN_PRESSURE_ATTRIBUTE = 0x0000
+local PRESSURE_CLUSTER_ID = 0x0403
 
 local AnalogInput = clusters.AnalogInput
 
@@ -39,6 +40,17 @@ local function dirty_level_handler(driver, device, value, zb_rx)
 end
 
 local added_handler = function(self, device)
+  local profile = "no-pressure-battery-level"
+  for _, ep in ipairs(device.zigbee_endpoints) do
+    if device:supports_server_cluster(PRESSURE_CLUSTER_ID, ep.id) then
+      profile = "pressure-battery-level"
+      break
+    end
+  end
+  device:try_update_metadata({profile = profile})
+  if profile == "pressure-battery-level" then
+    device:send(clusters.PressureMeasurement.attributes.MeasuredValue:read(device))
+  end
   device:send(AnalogInput.attributes.PresentValue:read(device))
 end
 
@@ -75,5 +87,5 @@ local zigbee_driver = {
 }
 
 defaults.register_for_default_handlers(zigbee_driver, zigbee_driver.supported_capabilities)
-local driver = ZigbeeDriver("thirdreality-air-pressure-sensor", zigbee_driver)
+local driver = ZigbeeDriver("thirdreality-smart-filter-sensor", zigbee_driver)
 driver:run()

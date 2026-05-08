@@ -1,0 +1,6 @@
+zigbeeManufacturer:
+  - id: "Third Reality/3RAQ1096Z"
+    deviceLabel: ThirdReality Air Quality Sensor
+    manufacturer: Third Reality, Inc
+    model: 3RAQ1096Z
+    deviceProfileName: thirdreality-air-quality

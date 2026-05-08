@@ -1,0 +1,6 @@
+name: 'ThirdReality Air Quality Sensor'
+packageKey: 'thirdreality-air-quality-sensor'
+permissions:
+  zigbee: {}
+description: "SmartThings driver for ThirdReality Air Quality Sensor (3RAQ1096Z)"
+vendorSupportInformation: "https://www.3reality.com/"

@@ -10,6 +10,7 @@ local TemperatureMeasurement = clusters.TemperatureMeasurement
 local THIRDREALITY_CO2_CLUSTER = 0x040D
 local THIRDREALITY_TVOC_CLUSTER = 0x042E
 local THIRDREALITY_ATTR = 0x0000
+local THIRDREALITY_ATTR_VOC = 0x0100
 
 -- Map VOC value to air quality health concern
 -- 0-100: excellent (good)
@@ -77,7 +78,7 @@ local thirdreality_sensor = {
         [THIRDREALITY_ATTR] = co2_attr_handler
       },
       [THIRDREALITY_TVOC_CLUSTER] = {
-        [THIRDREALITY_ATTR] = tvoc_attr_handler
+        [THIRDREALITY_ATTR_VOC] = tvoc_attr_handler
       }
     }
   },

@@ -110,6 +110,7 @@ local zigbee_switch_driver_template = {
     require("wallhero"),
     require("thirdreality"),
     require("thirdreality-dual-plug"),
+    require("thirdreality-wall-plug"),
     require("radar")
   },
   lifecycle_handlers = {

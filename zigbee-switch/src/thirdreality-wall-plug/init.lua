@@ -20,14 +20,14 @@ local utils = require "st.utils"
 
 local CHILD_ENDPOINT = 2
 
-local ZIGBEE_DUAL_METERING_SWITCH_FINGERPRINT = {
-  {mfr = "Third Reality, Inc", model = "3RDP01072Z"}
+local ZIGBEE_WALL_METERING_SWITCH_FINGERPRINT = {
+  {mfr = "Third Reality, Inc", model = "3RWP01073Z"}
 }
 
-local function can_handle_zigbee_dual_metering_switch(opts, driver, device, ...)
-  for _, fingerprint in ipairs(ZIGBEE_DUAL_METERING_SWITCH_FINGERPRINT) do
+local function can_handle_zigbee_wall_metering_switch(opts, driver, device, ...)
+  for _, fingerprint in ipairs(ZIGBEE_WALL_METERING_SWITCH_FINGERPRINT) do
     if device:get_manufacturer() == fingerprint.mfr and device:get_model() == fingerprint.model then
-      local subdriver = require("thirdreality-dual-plug")
+      local subdriver = require("thirdreality-wall-plug")
       return true, subdriver
     end
   end
@@ -48,7 +48,7 @@ local function device_added(driver, device, event)
     not (device.child_ids and utils.table_size(device.child_ids) ~= 0) and
     find_child(device, CHILD_ENDPOINT) == nil then
 
-    local name = "ThirdReality Smart Dual Plug ZP1"
+    local name = "ThirdReality Smart Wall Outlet ZW1"
     local metadata = {
       type = "EDGE_CHILD",
       label = name,
@@ -68,8 +68,8 @@ local function device_init(driver, device)
   end
 end
 
-local zigbee_dual_metering_switch = {
-  NAME = "ThirdReality Smart Dual Plug ZP1",
+local zigbee_wall_metering_switch = {
+  NAME = "ThirdReality Smart Wall Outlet ZW1",
   capability_handlers = {
     [capabilities.refresh.ID] = {
       [capabilities.refresh.commands.refresh.NAME] = do_refresh
@@ -79,7 +79,7 @@ local zigbee_dual_metering_switch = {
     init = device_init,
     added = device_added
   },
-  can_handle = can_handle_zigbee_dual_metering_switch
+  can_handle = can_handle_zigbee_wall_metering_switch
 }
 
-return zigbee_dual_metering_switch
+return zigbee_wall_metering_switch

@@ -4,6 +4,8 @@ local custom_clusters = require "thirdreality/custom_clusters"
 local cluster_base = require "st.zigbee.cluster_base"
 local data_types = require "st.zigbee.data_types"
 
+local vocIndex = capabilities["appleheart46609.vocIndex"]
+
 local RelativeHumidity = clusters.RelativeHumidity
 local TemperatureMeasurement = clusters.TemperatureMeasurement
 
@@ -11,26 +13,6 @@ local THIRDREALITY_CO2_CLUSTER = 0x040D
 local THIRDREALITY_TVOC_CLUSTER = 0x042E
 local THIRDREALITY_ATTR = 0x0000
 local THIRDREALITY_ATTR_VOC = 0x0100
-
--- Map VOC value to air quality health concern
--- 0-100: excellent (good)
--- 100-200: good
--- 200-300: light pollution (moderate)
--- 300-400: medium pollution (slightlyUnhealthy)
--- 400-500: heavy pollution (unhealthy)
-local function voc_to_air_quality_health(voc_value)
-  if voc_value <= 100 then
-    return "good"
-  elseif voc_value <= 200 then
-    return "moderate"
-  elseif voc_value <= 300 then
-    return "slightlyUnhealthy"
-  elseif voc_value <= 400 then
-    return "unhealthy"
-  else
-    return "veryUnhealthy"
-  end
-end
 
 local THIRDREALITY_FINGERPRINTS = {
   { mfr = "Third Reality, Inc", model = "3RAQ1096Z" }
@@ -58,12 +40,10 @@ local function co2_attr_handler(driver, device, value, zb_rx)
 end
 
 local function tvoc_attr_handler(driver, device, value, zb_rx)
-  device:emit_event_for_endpoint(zb_rx.address_header.src_endpoint.value, capabilities.tvocMeasurement.tvocLevel({ value = value.value, unit = "ppb" }))
-  device:emit_event_for_endpoint(zb_rx.address_header.src_endpoint.value, capabilities.airQualityHealthConcern.airQualityHealthConcern({ value = voc_to_air_quality_health(value.value) }))
+  device:emit_event_for_endpoint(zb_rx.address_header.src_endpoint.value, vocIndex.vocIndex(value.value))
 end
 
 local function added_handler(self, device)
-  device:emit_event(capabilities.airQualityHealthConcern.airQualityHealthConcern({ value = voc_to_air_quality_health(0) }))
   do_refresh(self, device)
 end
 

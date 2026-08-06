@@ -2,17 +2,13 @@ name: no-pressure-battery-level
 components:
 - id: main
   capabilities:
+  - id: appleheart46609.dirtyLevel
+    version: 1
   - id: battery
     version: 1
   - id: firmwareUpdate
     version: 1
   - id: refresh
-    version: 1
-  categories:
-  - name: AirQualityDetector
-- id: dirty-level
-  capabilities:
-  - id: level
     version: 1
   categories:
   - name: AirQualityDetector

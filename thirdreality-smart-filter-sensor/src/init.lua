@@ -17,6 +17,8 @@ local ZigbeeDriver = require "st.zigbee"
 local defaults = require "st.zigbee.defaults"
 local clusters = require "st.zigbee.zcl.clusters"
 
+local dirtyLevel = capabilities["appleheart46609.dirtyLevel"]
+
 local KEEN_PRESSURE_ATTRIBUTE = 0x0000
 local PRESSURE_CLUSTER_ID = 0x0403
 
@@ -36,7 +38,7 @@ local function dirty_level_handler(driver, device, value, zb_rx)
   local level_value = value.value
   level_value = round(level_value)
   local level_val = math.tointeger(level_value)
-  device:emit_component_event(device.profile.components["dirty-level"], capabilities.level.level(level_val))
+  device:emit_event(dirtyLevel.dirtyLevel({value = level_val, unit = "%"}))
 end
 
 local added_handler = function(self, device)
@@ -63,7 +65,7 @@ local zigbee_driver = {
   supported_capabilities = {
     capabilities.battery,
     capabilities.atmosphericPressureMeasurement,
-    capabilities.level,
+    dirtyLevel,
     capabilities.refresh
   },
   lifecycle_handlers = {

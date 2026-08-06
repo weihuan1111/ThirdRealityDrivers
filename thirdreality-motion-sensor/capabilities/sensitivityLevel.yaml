@@ -1,0 +1,26 @@
+id: appleheart46609.pirSensitivity
+version: 1
+status: proposed
+name: Sensitivity Level
+attributes:
+  sensitivityLevel:
+    schema:
+      type: object
+      properties:
+        value:
+          type: integer
+          minimum: 1
+          maximum: 5
+      required:
+        - value
+    setter: setSensitivityLevel
+commands:
+  setSensitivityLevel:
+    name: setSensitivityLevel
+    arguments:
+      - name: level
+        optional: false
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 5

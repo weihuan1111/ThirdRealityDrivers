@@ -16,12 +16,14 @@ local ZigbeeDriver = require "st.zigbee"
 local capabilities = require "st.capabilities"
 local defaults = require "st.zigbee.defaults"
 
+local vocIndex = capabilities["appleheart46609.vocIndex"]
+
 local thirdreality_air_quality_template = {
   supported_capabilities = {
     capabilities.temperatureMeasurement,
     capabilities.relativeHumidityMeasurement,
     capabilities.carbonDioxideMeasurement,
-    capabilities.tvocMeasurement,
+    vocIndex,
   },
   sub_drivers = { require("thirdreality") }
 }

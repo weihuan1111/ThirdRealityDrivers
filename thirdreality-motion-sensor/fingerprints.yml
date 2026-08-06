@@ -9,3 +9,8 @@ zigbeeManufacturer:
     manufacturer: Third Reality, Inc
     model: 3RPS01083Z
     deviceProfileName: motion-battery
+  - id: "Third Reality/3RMS26Z"
+    deviceLabel: ThirdReality Smart Motion Sensor Gen2
+    manufacturer: Third Reality, Inc
+    model: 3RMS26Z
+    deviceProfileName: motion-gen2
